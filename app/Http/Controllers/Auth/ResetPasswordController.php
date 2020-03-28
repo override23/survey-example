@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Str;
+use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class ResetPasswordController extends Controller
 {
@@ -27,4 +30,16 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function resetPassword($user, $password)
+    {
+        $user->setPassword($password);
+        $user->setRememberToken(Str::random(60));
+        EntityManager::persist($user);
+        EntityManager::flush();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
+    }
 }
