@@ -1,6 +1,7 @@
 Server requirements:
 * requirements for Laravel 7.x project https://laravel.com/docs/7.x#installing-laravel should be met
 * installed git client
+* installed composer
 
 1.Clone project from repository
 ```bash
