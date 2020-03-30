@@ -5,7 +5,7 @@ Server requirements:
 1.Clone project from repository
 ```bash
 #using SSH
-git@github.com:override23/survey-example.git
+git clone git@github.com:override23/survey-example.git
 
 #or using HTTPS
 git clone https://github.com/override23/survey-example.git
